@@ -1,3 +1,3 @@
 # iscj-hackathon-chatapp
 
-I changed the code
+This our ISCJ Hackathon submission
