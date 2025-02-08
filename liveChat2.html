@@ -20,6 +20,7 @@
             background: white;
             display: flex;
             flex-direction: column;
+            position: relative;
         }
         .chat-header {
             background: #007bff;
@@ -27,6 +28,20 @@
             padding: 20px;
             text-align: center;
             font-size: 1.5em;
+            position: relative;
+        }
+        .profile {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: white;
+            padding: 10px;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            font-weight: bold;
+            border: 2px solid #007bff;
         }
         .chat-content {
             display: flex;
@@ -39,6 +54,17 @@
             background: #e0e0e0;
             overflow-y: auto;
             padding: 15px;
+        }
+        .chat-room {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            background: #ffffff;
+            cursor: pointer;
+        }
+        .chat-room:hover {
+            background: #d0e8ff;
         }
         .chat-box {
             flex: 1;
@@ -94,12 +120,14 @@
 </head>
 <body>
     <div class="chat-container">
-        <div class="chat-header">Live Chat</div>
+        <div class="chat-header">Live Chat
+            <div class="profile" id="profile">U</div>
+        </div>
         <div class="chat-content">
             <div class="chat-list" id="chat-list">
-                <p>Chat 1</p>
-                <p>Chat 2</p>
-                <p>Chat 3</p>
+                <div class="chat-room">Chat 1</div>
+                <div class="chat-room">Chat 2</div>
+                <div class="chat-room">Chat 3</div>
             </div>
             <div class="chat-box" id="chat-box"></div>
         </div>
@@ -110,6 +138,11 @@
     </div>
 
     <script>
+        // Retrieve the username from the URL query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const username = urlParams.get('username');
+        document.getElementById("profile").textContent = username.charAt(0).toUpperCase();
+
         function sendMessage() {
             const input = document.getElementById("message-input");
             const message = input.value.trim();
