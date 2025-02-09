@@ -164,9 +164,10 @@
     </style>
 </head>
 <body>
+    <script src="script.js"></script>
     <div class="chat-container">
         <div class="chat-header">
-            <img src="c:\Users\Mohammad\Downloads\AppImage1-removebg-preview.png" alt="Logo" class="logo"> <!-- Add your logo image here -->
+            <img src="./AppImage1-removebg-preview.png" alt="Logo" class="logo"> <!-- Add your logo image here -->
             ISChatJoint
             <div class="profile" id="profile">U</div>
         </div>
@@ -181,6 +182,7 @@
     </div>
 
     <script>
+        //import sdk from 'matrix-js-sdk';
         const urlParams = new URLSearchParams(window.location.search);
         const username = urlParams.get('username');
         document.getElementById("profile").textContent = username ? username.charAt(0).toUpperCase() : "U";
@@ -209,7 +211,8 @@
 
         let container = document.getElementById('chat-list');
         let numDivs = 30;
-        for (let i = 0; i < numDivs; i++) {
+        console.log(rooms);
+        for (let i = 0; i < rooms.size(); i++) {
           let button = document.createElement('button');
           button.className = "chat-room";
           button.textContent = `Chat Room ${i + 1}`;
