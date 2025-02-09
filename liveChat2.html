@@ -14,6 +14,22 @@
             background-color: #f1f1f1;
             margin: 0;
         }
+        #chat-list button {
+           display: block;
+           width: 100%;
+           margin: 0;
+           padding: 10px;
+           box-sizing: border-box;
+           border: none;
+           border-radius: 0;
+           background-color: #f0f0f0;
+           cursor: pointer;
+        }
+
+        #chat-list button:hover {
+          background-color: #e0e0e0;
+        }
+
         .chat-container {
             width: 100vw;
             height: 100vh;
@@ -144,7 +160,7 @@
         const urlParams = new URLSearchParams(window.location.search);
         const username = urlParams.get('username');
         document.getElementById("profile").textContent = username ? username.charAt(0).toUpperCase() : "U";
-
+        
         function sendMessage() {
             const input = document.getElementById("message-input");
             const message = input.value.trim();
@@ -171,11 +187,14 @@
         let container = document.getElementById('chat-list');
         let numDivs = 30; // Example number of chat rooms
         for (let i = 0; i < numDivs; i++) {
-            let div = document.createElement('div');
-            div.className = "chat-room";
-            div.textContent = `Chat Room ${i + 1}`;
-            container.appendChild(div);
+          let button = document.createElement('button');
+          button.className = "chat-room";
+          button.textContent = `Chat Room ${i + 1}`;
+          button.onclick = () => displayChatRoom(`Chat Room ${i + 1}`);
+          container.appendChild(button);
+          container.appendChild(document.createElement('br'));
         }
+    
     </script>
 </body>
 </html>
