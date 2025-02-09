@@ -125,9 +125,22 @@
         </div>
         <div class="chat-content">
             <div class="chat-list" id="chat-list">
-                <div class="chat-room">Chat 1</div>
-                <div class="chat-room">Chat 2</div>
-                <div class="chat-room">Chat 3</div>
+            <script>
+                let container = document.getElementById('chat-list');
+                // Assume this is the number from the backend
+                let numDivs = 5;
+                for(let i = 0; i < numDivs; i++){
+                  // Create a new div
+                  let div = document.createElement('div');
+                  // Specifying the div's class
+                  div.className = "chat-room"
+                  // Add content to the div
+                  div.innerHTML = `backend.getChatName()`;
+                  // Add the div to the page
+                  document.body.appendChild(div);
+                  container.appendChild(div);
+                }
+              </script>
             </div>
             <div class="chat-box" id="chat-box"></div>
         </div>
