@@ -11,18 +11,29 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f1f1f1;
+            background-color: #0a192f; /* Matching background */
             margin: 0;
+            color: white;
         }
+
         .login-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: white;
+            background: #112240; /* Dark background */
             padding: 40px;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border: 3px solid gold; /* Gold border */
+            width: 300px; /* Adjust the width for better design */
         }
+
+        .login-container img {
+            width: 100px; /* Logo size */
+            height: 100px;
+            margin-bottom: 20px;
+        }
+
         .login-container input,
         .login-container button {
             padding: 15px;
@@ -30,29 +41,46 @@
             font-size: 1.2em;
             border-radius: 5px;
             border: 1px solid #ccc;
+            width: 100%;
         }
+
+        .login-container input {
+            background-color: #0a192f; /* Dark background for input */
+            color: gold;
+        }
+
         .login-container button {
-            background: #007bff;
-            color: white;
+            background: gold;
+            color: #0a192f;
             border: none;
             cursor: pointer;
         }
+
         .login-container button:hover {
-            background: #0056b3;
+            background: rgb(186, 152, 40); /* Hover effect */
         }
+
     </style>
 </head>
 <body>
     <div class="login-container">
-        <h2>Login</h2>
+        <img src="c:\Users\Mohammad\Downloads\AppImage1-removebg-preview.png" alt="Logo"> <!-- Your logo here -->
+        <h2>Log in to ISChatJoint!</h2>
         <input type="text" id="username" placeholder="Enter username">
+        <input type="password" id="password" placeholder="Enter password"> <!-- Password field -->
         <button onclick="login()">Enter Chat</button>
     </div>
 
     <script>
         function login() {
             const username = document.getElementById("username").value.trim();
-            if (username === "") return;
+            const password = document.getElementById("password").value.trim();
+            
+            if (username === "" || password === "") {
+                alert("Please enter both username and password.");
+                return;
+            }
+
             // Redirect to chat page with the username as a query parameter
             window.location.href = `chat.html?username=${encodeURIComponent(username)}`;
         }
