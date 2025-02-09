@@ -23,7 +23,7 @@
             position: relative;
         }
         .chat-header {
-            background: #007bff;
+            background: rgb(255, 157, 0);
             color: white;
             padding: 20px;
             text-align: center;
@@ -54,6 +54,7 @@
             background: #e0e0e0;
             overflow-y: auto;
             padding: 15px;
+            max-height: 100%;
         }
         .chat-room {
             padding: 10px;
@@ -72,6 +73,8 @@
             padding: 15px;
             display: flex;
             flex-direction: column;
+            max-height: 100%;
+            height: auto;
         }
         .message {
             padding: 15px 20px;
@@ -79,6 +82,7 @@
             border-radius: 12px;
             max-width: 80%;
             font-size: 1.2em;
+            word-wrap: break-word;
         }
         .sent {
             background: #007bff;
@@ -102,6 +106,8 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             outline: none;
+            max-height: 100px;
+            overflow-y: auto;
         }
         .chat-input button {
             background: #007bff;
@@ -124,28 +130,11 @@
             <div class="profile" id="profile">U</div>
         </div>
         <div class="chat-content">
-            <div class="chat-list" id="chat-list">
-            <script>
-                let container = document.getElementById('chat-list');
-                // Assume this is the number from the backend
-                let numDivs = 5;
-                for(let i = 0; i < numDivs; i++){
-                  // Create a new div
-                  let div = document.createElement('div');
-                  // Specifying the div's class
-                  div.className = "chat-room"
-                  // Add content to the div
-                  div.innerHTML = `backend.getChatName()`;
-                  // Add the div to the page
-                  document.body.appendChild(div);
-                  container.appendChild(div);
-                }
-              </script>
-            </div>
+            <div class="chat-list" id="chat-list"></div>
             <div class="chat-box" id="chat-box"></div>
         </div>
         <div class="chat-input">
-            <input type="text" id="message-input" placeholder="Type a message...">
+            <input type="text" id="message-input" placeholder="Type a message..." oninput="adjustInputHeight()">
             <button onclick="sendMessage()">Send</button>
         </div>
     </div>
@@ -154,7 +143,7 @@
         // Retrieve the username from the URL query parameter
         const urlParams = new URLSearchParams(window.location.search);
         const username = urlParams.get('username');
-        document.getElementById("profile").textContent = username.charAt(0).toUpperCase();
+        document.getElementById("profile").textContent = username ? username.charAt(0).toUpperCase() : "U";
 
         function sendMessage() {
             const input = document.getElementById("message-input");
@@ -168,7 +157,24 @@
             chatBox.appendChild(messageElement);
             
             input.value = "";
+            input.style.height = "auto";
             chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function adjustInputHeight() {
+            const input = document.getElementById("message-input");
+            input.style.height = "auto";
+            input.style.height = Math.min(input.scrollHeight, 100) + "px";
+        }
+
+        // Sample chat rooms for demonstration
+        let container = document.getElementById('chat-list');
+        let numDivs = 30; // Example number of chat rooms
+        for (let i = 0; i < numDivs; i++) {
+            let div = document.createElement('div');
+            div.className = "chat-room";
+            div.textContent = `Chat Room ${i + 1}`;
+            container.appendChild(div);
         }
     </script>
 </body>
